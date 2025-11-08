@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: tradieaipro
+    env: node
+    plan: starter
+    buildCommand: npm run build
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: OPENAI_API_KEY
+        sync: false
+    healthCheckPath: /api/health
+
