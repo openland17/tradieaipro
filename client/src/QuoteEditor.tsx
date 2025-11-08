@@ -189,8 +189,9 @@ export default function QuoteEditor() {
 
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 max-w-[480px] sm:max-w-[1040px] mx-auto print:py-4 print:px-0">
-      <MotionFade>
-        <GlassCard className="mb-6" padding="lg">
+      {items.length === 0 && (
+        <MotionFade>
+          <GlassCard className="mb-6 print:hidden" padding="lg">
           <div className="text-center mb-8">
             <h1 className="text-4xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-brand to-brand-glow bg-clip-text text-transparent">
               TradieAI Pro
@@ -309,6 +310,7 @@ export default function QuoteEditor() {
           </div>
         </GlassCard>
       </MotionFade>
+      )}
 
       {loading && (
         <MotionFade>

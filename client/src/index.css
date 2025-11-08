@@ -369,9 +369,8 @@ textarea {
     page-break-inside: avoid;
   }
 
-  /* Hide form section when printing quote */
-  .form-section:has(+ .quote-results),
-  .form-section:has(~ .quote-results) {
+  /* Hide form when quote is visible */
+  .print\\:hidden {
     display: none !important;
   }
 
