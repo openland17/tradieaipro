@@ -446,7 +446,7 @@ export default function QuoteEditor() {
               </div>
             </div>
 
-            <div className="mb-6">
+            <div className="mb-6 print:hidden">
               <label htmlFor="notes" className="block text-sm font-semibold text-text mb-2">
                 Notes (optional)
               </label>
@@ -459,6 +459,13 @@ export default function QuoteEditor() {
                 className="w-full px-4 py-3 rounded-lg glass-strong border border-border text-text placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all resize-y"
               />
             </div>
+
+            {notes && (
+              <div className="mb-6 p-4 rounded-lg glass-strong border border-border print:border-gray-300 print:block hidden">
+                <h3 className="text-sm font-semibold text-text mb-2 print:text-gray-900">Notes:</h3>
+                <p className="text-text print:text-gray-700 whitespace-pre-wrap">{notes}</p>
+              </div>
+            )}
 
             <div className="flex flex-wrap gap-3">
               <NeonButton

@@ -374,6 +374,11 @@ textarea {
     display: none !important;
   }
 
+  /* Show hidden elements when printing */
+  .print\\:block {
+    display: block !important;
+  }
+
   /* Ensure proper spacing */
   .space-y-4 > * + * {
     margin-top: 0.5rem !important;
