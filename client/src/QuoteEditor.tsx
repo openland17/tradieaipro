@@ -188,7 +188,7 @@ export default function QuoteEditor() {
   }
 
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 max-w-[480px] sm:max-w-[1040px] mx-auto">
+    <div className="min-h-screen py-8 px-4 sm:px-6 max-w-[480px] sm:max-w-[1040px] mx-auto print:py-4 print:px-0">
       <MotionFade>
         <GlassCard className="mb-6" padding="lg">
           <div className="text-center mb-8">
@@ -350,8 +350,8 @@ export default function QuoteEditor() {
 
       {items.length > 0 && (
         <MotionFade delay={0.1}>
-          <GlassCard className="mb-6" padding="lg">
-            <h2 className="text-2xl font-bold text-text mb-6">Quote Details</h2>
+          <GlassCard className="mb-6 print:mb-4" padding="lg">
+            <h2 className="text-2xl font-bold text-text mb-6 print:mb-4 print:text-xl">Quote Details</h2>
 
             <div className="overflow-x-auto mb-6">
               <table className="w-full">

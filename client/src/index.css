@@ -185,24 +185,216 @@ textarea {
 
 /* Print styles */
 @media print {
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+
+  /* Hide background effects */
   body::before,
   body::after {
     display: none !important;
   }
 
+  /* Hide background components */
+  canvas,
+  [class*="Aurora"],
+  [class*="Grid"],
+  [class*="Noise"] {
+    display: none !important;
+  }
+
+  /* Reset glass effects for print */
   .glass,
   .glass-strong {
     background: white !important;
     backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     box-shadow: none !important;
     border: 1px solid #e5e7eb !important;
+    page-break-inside: avoid;
   }
 
-  .text-text {
+  /* Text colors for print */
+  .text-text,
+  h1, h2, h3, h4, h5, h6,
+  p, span, div, td, th {
     color: #0f172a !important;
   }
 
   .text-text-muted {
     color: #64748b !important;
+  }
+
+  .text-brand {
+    color: #0ea5e9 !important;
+  }
+
+  /* Hide interactive elements */
+  button,
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+  }
+
+  /* Show input values as plain text */
+  input[type="text"]:not([readonly]),
+  input[type="number"]:not([readonly]),
+  select,
+  textarea:not([readonly]) {
+    display: inline-block !important;
+    width: auto !important;
+    min-height: auto !important;
+  }
+
+  /* Hide buttons and actions */
+  button,
+  [class*="Button"],
+  [class*="Magnetic"],
+  .actions,
+  .button-group {
+    display: none !important;
+  }
+
+  /* Ensure tables print properly */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    border: 1px solid #e5e7eb !important;
+    padding: 8px 12px !important;
+    text-align: left !important;
+  }
+
+  th {
+    background: #f8fafc !important;
+    font-weight: 600 !important;
+  }
+
+  /* Prevent page breaks in bad places */
+  .quote-results,
+  .glass {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  /* Container adjustments */
+  .container,
+  [class*="max-w"] {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Remove spacing that's not needed */
+  .mb-6,
+  .mb-4,
+  .mb-8 {
+    margin-bottom: 1rem !important;
+  }
+
+  /* Ensure proper font sizes */
+  body {
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+  }
+
+  h1 {
+    font-size: 24pt !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  h2 {
+    font-size: 18pt !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Hide loading states and errors */
+  [class*="loading"],
+  [class*="error"],
+  [class*="share-link"] {
+    display: none !important;
+  }
+
+  /* Make inputs look like text when printing */
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    color: inherit !important;
+    width: 100% !important;
+    min-height: auto !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+  }
+
+  /* Hide select arrows */
+  select {
+    background-image: none !important;
+  }
+
+  /* Ensure table cells display properly */
+  table td input,
+  table td select {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Print-friendly totals section */
+  .totals,
+  [class*="totals"] {
+    border-top: 2px solid #0f172a !important;
+    margin-top: 1rem !important;
+    padding-top: 1rem !important;
+    page-break-inside: avoid;
+  }
+
+  /* Hide form section when printing quote */
+  .form-section:has(+ .quote-results),
+  .form-section:has(~ .quote-results) {
+    display: none !important;
+  }
+
+  /* Ensure proper spacing */
+  .space-y-4 > * + * {
+    margin-top: 0.5rem !important;
+  }
+
+  /* Hide icons */
+  svg,
+  [class*="lucide"] {
+    display: none !important;
+  }
+
+  /* Print header */
+  header {
+    border-bottom: 2px solid #0f172a !important;
+    margin-bottom: 1rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  /* Ensure quote details are prominent */
+  h2 {
+    page-break-after: avoid;
   }
 }

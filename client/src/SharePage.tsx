@@ -66,7 +66,7 @@ export default function SharePage() {
   }
 
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 max-w-[480px] sm:max-w-[1040px] mx-auto">
+    <div className="min-h-screen py-8 px-4 sm:px-6 max-w-[480px] sm:max-w-[1040px] mx-auto print:py-4 print:px-0">
       <MotionFade>
         <GlassCard className="mb-6" padding="lg">
           <div className="text-center mb-8 pb-6 border-b border-border">
