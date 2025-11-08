@@ -353,7 +353,13 @@ export default function QuoteEditor() {
       {items.length > 0 && (
         <MotionFade delay={0.1}>
           <GlassCard className="mb-6 print:mb-4" padding="lg">
-            <h2 className="text-2xl font-bold text-text mb-6 print:mb-4 print:text-xl">Quote Details</h2>
+            <div className="print:mb-4 mb-6">
+              <h1 className="text-3xl print:text-2xl font-bold text-text mb-2 print:mb-1">TradieAI Pro</h1>
+              <h2 className="text-2xl print:text-xl font-bold text-text print:mb-2">Quote Details</h2>
+              {customerName && (
+                <p className="text-text-muted print:text-sm mt-2">For: {customerName}</p>
+              )}
+            </div>
 
             <div className="overflow-x-auto mb-6">
               <table className="w-full">
