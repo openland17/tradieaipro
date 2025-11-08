@@ -118,11 +118,12 @@ Make reasonable assumptions for missing details. Keep labels simple and professi
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "You are a quote generator for Australian tradies. Always return valid JSON only." },
+        { role: "system", content: "You are a quote generator for Australian tradies. Always return valid JSON only. Never include markdown code blocks, just pure JSON." },
         { role: "user", content: prompt }
       ],
       temperature: 0.7,
-      max_tokens: 500
+      max_tokens: 800,
+      response_format: { type: "json_object" }
     });
 
     const content = completion.choices[0]?.message?.content?.trim();
@@ -130,21 +131,51 @@ Make reasonable assumptions for missing details. Keep labels simple and professi
       throw new Error("Empty response from AI");
     }
 
+    // Log raw response for debugging
+    console.log("📝 Raw AI response (first 300 chars):", content.substring(0, 300));
+
     // Try to extract JSON from markdown code blocks if present
     const jsonMatch = content.match(/```(?:json)?\s*(\{[\s\S]*\})\s*```/) || [null, content];
     const jsonStr = jsonMatch[1] || content;
 
-    const parsed = JSON.parse(jsonStr) as AIResponse;
+    let parsed: AIResponse;
+    try {
+      parsed = JSON.parse(jsonStr) as AIResponse;
+    } catch (parseError) {
+      console.error("❌ JSON parse error:", parseError);
+      console.error("❌ Content that failed to parse:", jsonStr.substring(0, 500));
+      throw new Error("Failed to parse AI response as JSON");
+    }
 
     // Validate structure
-    if (!Array.isArray(parsed.items) || parsed.items.length < 3 || parsed.items.length > 6) {
-      throw new Error("Invalid items array");
+    if (!Array.isArray(parsed.items)) {
+      console.error("❌ AI returned non-array items:", typeof parsed.items, parsed.items);
+      throw new Error("Invalid items array - not an array");
+    }
+    
+    if (parsed.items.length < 3 || parsed.items.length > 6) {
+      console.error("❌ AI returned invalid item count:", parsed.items.length, "Expected 3-6");
+      throw new Error(`Invalid items array - got ${parsed.items.length} items, expected 3-6`);
     }
 
     // Validate each item
-    for (const item of parsed.items) {
-      if (!item.label || typeof item.qty !== "number" || !["hr", "m2", "item"].includes(item.unit) || typeof item.unitPrice !== "number") {
-        throw new Error("Invalid item structure");
+    for (let i = 0; i < parsed.items.length; i++) {
+      const item = parsed.items[i];
+      if (!item.label || typeof item.label !== "string") {
+        console.error(`❌ Item ${i} missing or invalid label:`, item);
+        throw new Error(`Invalid item structure - item ${i} missing label`);
+      }
+      if (typeof item.qty !== "number" || isNaN(item.qty)) {
+        console.error(`❌ Item ${i} invalid qty:`, item.qty, typeof item.qty);
+        throw new Error(`Invalid item structure - item ${i} invalid quantity`);
+      }
+      if (!["hr", "m2", "item"].includes(item.unit)) {
+        console.error(`❌ Item ${i} invalid unit:`, item.unit);
+        throw new Error(`Invalid item structure - item ${i} invalid unit`);
+      }
+      if (typeof item.unitPrice !== "number" || isNaN(item.unitPrice)) {
+        console.error(`❌ Item ${i} invalid unitPrice:`, item.unitPrice, typeof item.unitPrice);
+        throw new Error(`Invalid item structure - item ${i} invalid unit price`);
       }
     }
 
