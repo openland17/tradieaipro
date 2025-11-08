@@ -8,9 +8,9 @@
     "dev:client": "cd client && npm run dev",
     "build": "npm run install:all && npm run build:client && npm run build:server",
     "build:server": "cd server && npm run build",
-    "build:client": "cd client && npm ci && npm run build",
+    "build:client": "cd client && npm install && npm run build",
     "test": "cd server && npm test",
-    "install:all": "npm install && cd server && npm install && cd ../client && npm ci",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
     "start": "cd server && npm start"
   },
   "devDependencies": {
