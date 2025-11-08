@@ -189,9 +189,9 @@ export default function QuoteEditor() {
 
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 max-w-[480px] sm:max-w-[1040px] mx-auto print:py-4 print:px-0">
-      {items.length === 0 && (
+      <div className={items.length > 0 ? "print:hidden" : ""}>
         <MotionFade>
-          <GlassCard className="mb-6 print:hidden" padding="lg">
+          <GlassCard className="mb-6" padding="lg">
           <div className="text-center mb-8">
             <h1 className="text-4xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-brand to-brand-glow bg-clip-text text-transparent">
               TradieAI Pro
@@ -310,11 +310,11 @@ export default function QuoteEditor() {
           </div>
         </GlassCard>
       </MotionFade>
-      )}
+      </div>
 
       {loading && (
         <MotionFade>
-          <GlassCard className="mb-6">
+          <GlassCard className="mb-6 print:hidden">
             <div className="flex items-center justify-center gap-3 text-text">
               <Loader2 className="w-5 h-5 animate-spin text-brand" />
               <span>Generating your quote...</span>
@@ -325,7 +325,7 @@ export default function QuoteEditor() {
 
       {error && (
         <MotionFade>
-          <GlassCard className="mb-6 border-danger/50 bg-danger/10">
+          <GlassCard className="mb-6 border-danger/50 bg-danger/10 print:hidden">
             <p className="text-danger mb-4">{error}</p>
             <NeonButton variant="outline" onClick={handleUseDemo} size="sm">
               Use Demo Quote
@@ -336,7 +336,7 @@ export default function QuoteEditor() {
 
       {shareUrl && (
         <MotionFade>
-          <GlassCard className="mb-6 border-ok/50 bg-ok/10">
+          <GlassCard className="mb-6 border-ok/50 bg-ok/10 print:hidden">
             <p className="text-ok font-semibold mb-2">Quote saved! Share this link:</p>
             <a
               href={shareUrl}
