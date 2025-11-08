@@ -103,25 +103,25 @@ export default function SharePage() {
             <p className="text-text leading-relaxed">{quote.jobDescription}</p>
           </div>
 
-          <div className="overflow-x-auto mb-6">
-            <table className="w-full">
+          <div className="overflow-x-auto mb-6 print:overflow-visible">
+            <table className="w-full print:table-fixed">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-3 px-2 text-sm font-semibold text-text-muted">Item</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted">Qty</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted">Unit</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted">Price</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted">Total</th>
+                  <th className="text-left py-3 px-2 text-sm font-semibold text-text-muted print:w-[40%] print:py-2 print:px-1 print:text-xs">Item</th>
+                  <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted print:w-[12%] print:py-2 print:px-1 print:text-xs">Qty</th>
+                  <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted print:w-[12%] print:py-2 print:px-1 print:text-xs">Unit</th>
+                  <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted print:w-[18%] print:py-2 print:px-1 print:text-xs">Price</th>
+                  <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted print:w-[18%] print:py-2 print:px-1 print:text-xs">Total</th>
                 </tr>
               </thead>
               <tbody>
                 {quote.items.map((item, index) => (
                   <tr key={index} className="border-b border-border/50">
-                    <td className="py-3 px-2 text-text">{item.label}</td>
-                    <td className="py-3 px-2 text-right text-text font-tabular">{item.qty}</td>
-                    <td className="py-3 px-2 text-right text-text-muted">{item.unit}</td>
-                    <td className="py-3 px-2 text-right text-text font-tabular">{formatCurrency(item.unitPrice)}</td>
-                    <td className="py-3 px-2 text-right font-semibold text-text font-tabular">
+                    <td className="py-3 px-2 text-text print:py-2 print:px-1 print:text-xs">{item.label}</td>
+                    <td className="py-3 px-2 text-right text-text font-tabular print:py-2 print:px-1 print:text-xs">{item.qty}</td>
+                    <td className="py-3 px-2 text-right text-text-muted print:py-2 print:px-1 print:text-xs">{item.unit}</td>
+                    <td className="py-3 px-2 text-right text-text font-tabular print:py-2 print:px-1 print:text-xs">{formatCurrency(item.unitPrice)}</td>
+                    <td className="py-3 px-2 text-right font-semibold text-text font-tabular print:py-2 print:px-1 print:text-xs">
                       {formatCurrency(item.qty * item.unitPrice)}
                     </td>
                   </tr>

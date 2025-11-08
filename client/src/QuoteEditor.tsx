@@ -361,59 +361,59 @@ export default function QuoteEditor() {
               )}
             </div>
 
-            <div className="overflow-x-auto mb-6">
-              <table className="w-full">
+            <div className="overflow-x-auto mb-6 print:overflow-visible">
+              <table className="w-full print:table-fixed">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left py-3 px-2 text-sm font-semibold text-text-muted">Item</th>
-                    <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted">Qty</th>
-                    <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted">Unit</th>
-                    <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted">Price</th>
-                    <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted">Total</th>
+                    <th className="text-left py-3 px-2 text-sm font-semibold text-text-muted print:w-[40%] print:py-2 print:px-1 print:text-xs">Item</th>
+                    <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted print:w-[12%] print:py-2 print:px-1 print:text-xs">Qty</th>
+                    <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted print:w-[12%] print:py-2 print:px-1 print:text-xs">Unit</th>
+                    <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted print:w-[18%] print:py-2 print:px-1 print:text-xs">Price</th>
+                    <th className="text-right py-3 px-2 text-sm font-semibold text-text-muted print:w-[18%] print:py-2 print:px-1 print:text-xs">Total</th>
                   </tr>
                 </thead>
                 <tbody>
                   {items.map((item, index) => (
                     <tr key={index} className="border-b border-border/50">
-                      <td className="py-3 px-2">
+                      <td className="py-3 px-2 print:py-2 print:px-1 print:text-xs">
                         <input
                           type="text"
                           value={item.label}
                           onChange={(e) => updateItem(index, 'label', e.target.value)}
-                          className="w-full px-3 py-2 rounded glass-strong border border-border/50 text-text text-sm focus:outline-none focus:ring-1 focus:ring-brand"
+                          className="w-full px-3 py-2 rounded glass-strong border border-border/50 text-text text-sm focus:outline-none focus:ring-1 focus:ring-brand print:w-full print:p-0 print:border-0 print:text-xs"
                         />
                       </td>
-                      <td className="py-3 px-2">
+                      <td className="py-3 px-2 text-right print:py-2 print:px-1 print:text-xs">
                         <input
                           type="number"
                           step="0.5"
                           min="0"
                           value={item.qty}
                           onChange={(e) => updateItem(index, 'qty', parseFloat(e.target.value) || 0)}
-                          className="w-20 px-3 py-2 rounded glass-strong border border-border/50 text-text text-sm text-right font-tabular focus:outline-none focus:ring-1 focus:ring-brand"
+                          className="w-20 px-3 py-2 rounded glass-strong border border-border/50 text-text text-sm text-right font-tabular focus:outline-none focus:ring-1 focus:ring-brand print:w-full print:p-0 print:border-0 print:text-xs"
                         />
                       </td>
-                      <td className="py-3 px-2">
+                      <td className="py-3 px-2 text-right print:py-2 print:px-1 print:text-xs">
                         <select
                           value={item.unit}
                           onChange={(e) => updateItem(index, 'unit', e.target.value as 'hr' | 'm2' | 'item')}
-                          className="px-3 py-2 rounded glass-strong border border-border/50 text-text text-sm bg-panel focus:outline-none focus:ring-1 focus:ring-brand"
+                          className="px-3 py-2 rounded glass-strong border border-border/50 text-text text-sm bg-panel focus:outline-none focus:ring-1 focus:ring-brand print:w-full print:p-0 print:border-0 print:text-xs print:bg-transparent"
                         >
                           <option value="hr">hr</option>
                           <option value="m2">m²</option>
                           <option value="item">item</option>
                         </select>
                       </td>
-                      <td className="py-3 px-2">
+                      <td className="py-3 px-2 text-right print:py-2 print:px-1 print:text-xs">
                         <input
                           type="number"
                           min="0"
                           value={item.unitPrice}
                           onChange={(e) => updateItem(index, 'unitPrice', parseInt(e.target.value) || 0)}
-                          className="w-24 px-3 py-2 rounded glass-strong border border-border/50 text-text text-sm text-right font-tabular focus:outline-none focus:ring-1 focus:ring-brand"
+                          className="w-24 px-3 py-2 rounded glass-strong border border-border/50 text-text text-sm text-right font-tabular focus:outline-none focus:ring-1 focus:ring-brand print:w-full print:p-0 print:border-0 print:text-xs"
                         />
                       </td>
-                      <td className="py-3 px-2 text-right font-semibold text-text font-tabular">
+                      <td className="py-3 px-2 text-right font-semibold text-text font-tabular print:py-2 print:px-1 print:text-xs">
                         {formatCurrency(item.qty * item.unitPrice)}
                       </td>
                     </tr>
